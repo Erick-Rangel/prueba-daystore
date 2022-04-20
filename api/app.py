@@ -3,7 +3,7 @@ from flask import Flask,request,jsonify
 from database import prueba, setup
 
 app = Flask(__name__)
-setup.create_tables()
+setup.create_tables() 
 
 @app.route("/prueba", methods=['POST'])
 def add_prueba():
