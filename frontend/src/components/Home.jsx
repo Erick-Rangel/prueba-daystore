@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCiudades, getCiudad } from "../store/slices/Ciudades";
 import { getFilters } from "../store/slices/Filters";
@@ -99,14 +99,10 @@ export const Home = () => {
         ]
       }
       
-      // declaramos el estado para el select
-      const [ciudad, setCiudad] = useState("");
-  
       // declaramos la funcion para obtener la ciudad seleccionada
       const handleChange = (e) => {
         e.preventDefault(); 
-        dispatch(getCiudad(ciudad));
-        setCiudad(e.target.value);
+        dispatch(getCiudad(e.target.value));
       };
 
   return (
