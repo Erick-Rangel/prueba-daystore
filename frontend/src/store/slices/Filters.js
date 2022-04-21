@@ -20,6 +20,5 @@ export default userSlice.reducer;
 export const getFilters = () => async (dispatch) => {
   const json = await axios.get("http://localhost:5000/tasks");
   const data = json.data.tasks;
-  console.log(data);
   dispatch(setFilter(data));
 };

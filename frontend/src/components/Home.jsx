@@ -89,12 +89,12 @@ export const Home = () => {
           {
             label:'Numero de servicios diarios',
             data: servicios,
-            backgroundColor: 'rgba(255, 99, 132, 0.2)'
+            backgroundColor: 'rgba(230,225,20,0.5)',
           },
           {
             label:'Meta para la ciudad',
             data: meta,
-            backgroundColor: 'rgba(54, 162, 235, 0.2)'
+            backgroundColor: 'rgba(58, 162, 250, 0.2)'
           }
         ]
       }
@@ -107,7 +107,6 @@ export const Home = () => {
         e.preventDefault(); 
         dispatch(getCiudad(ciudad));
         setCiudad(e.target.value);
-        console.log(ciudad);
       };
 
   return (

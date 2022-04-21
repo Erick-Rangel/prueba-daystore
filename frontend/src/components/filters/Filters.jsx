@@ -13,7 +13,6 @@ const Filters = ({data, handleChange, dispatch, getAllCiudades}) => {
   return (
     <div>
       <select onChange={handleChange}>
-        <option>Selecciona una Ciudad</option>
         {data?.map((ciudad) => (
           <option key={ciudad.id} value={ciudad.id}>
             {ciudad.Ciudades}
