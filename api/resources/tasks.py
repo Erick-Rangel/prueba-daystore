@@ -4,7 +4,9 @@ from database import tasks
 
 tasks_bp = Blueprint('routes-tasks', __name__)
 
-@tasks_bp.route("/prueba", methods=['POST'])
+
+
+@tasks_bp.route("/tasks", methods=['POST'])
 def add_task():
     Ciudades = request.json['Ciudades']
     Numero_de_servicios_diarios = request.json['Numero_de_servicios_diarios']
@@ -19,12 +21,15 @@ def add_task():
     return jsonify({'message': 'Error adding task'})
 
 
+
+
+
 @tasks_bp.route("/tasks", methods=['GET'])
 def get_tasks():
     data = tasks.select_all_tasks()
 
     if(data):
-        return jsonify({'tasks': data})
+        return jsonify({'status': 200, 'tasks': data})
     elif data == False:
         return jsonify({'message': 'Internal Error'})
     else:
@@ -51,3 +56,14 @@ def deleted_task():
     if tasks.delete_task(id_arg):
         return jsonify({'message': 'Task deleted successfully'})
     return jsonify({'message': 'Error deleting task'})
+
+
+
+@tasks_bp.route("/tasks/<id>", methods=['GET'])
+def get_task(id):
+    task = tasks.select_task_by_id(id)
+
+    if task:
+        return jsonify({'task': task})
+    return jsonify({'message': 'Task not found'})
+    
