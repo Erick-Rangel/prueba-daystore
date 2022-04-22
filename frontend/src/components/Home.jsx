@@ -35,23 +35,23 @@ export const Home = () => {
      e.preventDefault();
      html2canvas(document.querySelector("#grafica")).then((canvas) => {
        const imgData = canvas.toDataURL("image/png");
-       const pdf = new jsPDF("p", "pt", "a4", true);
-       pdf.addImage(imgData, "PNG", 5, 5, 590, 800);
+       const pdf = new jsPDF("l", "pt", "a4", true);
+       pdf.addImage(imgData, "PNG", 5, 5, 790, 585);
        pdf.save("grafica.pdf");
      });   
   }; 
   
-  /* const generateImg = async (e) => {
+   const generateImg = async (e) => {
     e.preventDefault();
-    html2canvas(document.querySelector("#grafica"), {
-      onrendered: (canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const img = new Image();
-        img.src = imgData;
-        img.save("grafica.png");
+     html2canvas(document.querySelector("#grafica")).then((canvas) => {
+       const imgData = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+      var a = document.createElement("a");
+      a.href =imgData;
+      a.download = "Diagrama.png";
+      a.click();
+     });
     }
-    });
-  }; */
+
   // declaramos el dispatch para usar en el componente
   const dispatch = useDispatch();
 
@@ -106,13 +106,37 @@ export const Home = () => {
       };
 
   return (
-    <div>
-      <div style={{ width: "80%" }} id="grafica">
-        <Bar data={datas} options={options} />
+    <div className="container">
+      <div className="row">
+        <div className="col-md-12">
+        </div>
       </div>
-      <button onClick={generatePdf}>Generar PDF</button>
-      {/* <button onClick={generateImg}>Generar Imagen</button> */}
-      <Filters data={filter} handleChange={handleChange} dispatch={dispatch} getAllCiudades={getAllCiudades}/>
+      <div className="row">
+        <div className="col-md-12">
+          <Filters
+            data={filter}
+            handleChange={handleChange}
+            dispatch={dispatch}
+            getAllCiudades={getAllCiudades}
+          />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12">
+          <div id="grafica" style={{width:"90%"}}>
+            <Bar data={datas} options={options} />
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12">
+          <button onClick={generatePdf} className="btn btn-primary">
+        Generar PDF</button>
+          <button onClick={generateImg}>Generar Imagen</button>
+        </div>
+      </div>
     </div>
   );
-};
+}
+export default Home;
+  
